@@ -1,41 +1,47 @@
-// defining constants
-const INCREMENT = "INCREMENT";
-const DECREMENT = "DECREMENT";
+// state - count: 0
+// action - increment, decrement, reset
+// reducer
+// store
 
-//state
-const initialCounterState = {
+const { createStore } = require("redux");
+
+//Constant
+const ADD_USER = "ADD_USER";
+
+const initialState = {
+  users: ["anis"],
   count: 0,
 };
 
-//action
-
-const incrementCounter = () => {
+const addUser = (user) => {
   return {
-    type: INCREMENT,
-  };
-};
-const decrementCounter = () => {
-  return {
-    type: DECREMENT,
+    type: ADD_USER,
+    payload: user,
   };
 };
 
-// create reducer for counter
-const counterReducer = (state = initialCounterState, action) => {
+//CREATING REDUCER
+const userReducer = (state = initialState, action) => {
   switch (action.type) {
-    case INCREMENT:
+    case ADD_USER:
       return {
-        ...state,
+        users: [...state.users, action.payload],
         count: state.count + 1,
-      };
-
-    case DECREMENT:
-      return {
-        ...state,
-        count: state.count - 1,
       };
 
     default:
       state;
   }
 };
+
+//store
+const store = createStore(userReducer);
+store.subscribe(() => {
+  console.log(store.getState());
+});
+
+store.dispatch(addUser("rafiq"));
+store.dispatch(addUser("rafiq"));
+store.dispatch(addUser("rafiq"));
+store.dispatch(addUser("rafiq"));
+store.dispatch(addUser("rafiq"));
