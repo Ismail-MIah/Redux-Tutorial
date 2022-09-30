@@ -20,7 +20,8 @@ const addUser = (user) => {
   };
 };
 
-//CREATING REDUCER
+//CREATING REDUCER and ........
+
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_USER:
